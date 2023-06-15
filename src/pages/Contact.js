@@ -6,7 +6,7 @@ import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import gsap from 'gsap';
 
 
-export default function Experience() {
+export default function Contact() {
   
   const icons = {
     linkedin: faLinkedin,
@@ -28,7 +28,7 @@ export default function Experience() {
     <div className='bg-gradient-animate  flex items-center justify-center h-screen font-mono'>
       <div className='bg-opacity-10 bg-white bg-blur-md backdrop-filter backdrop-blur-md p-6 pb-0 rounded-lg shadow-lg  w-72 h-72 flex flex-col' >
         <header className='flex flex-col justify-center items-center'>
-          <h1 className='text-white font-bold'>Experience</h1>
+          <h1 className='text-white font-bold'>Contatos</h1>
         </header>
         <div className='mt-2' >
           <h1 className='ml-4 text-[14px] text-white'>About me</h1>

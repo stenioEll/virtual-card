@@ -1,4 +1,4 @@
-//import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLaptop } from '@fortawesome/free-solid-svg-icons';
@@ -56,13 +56,13 @@ export default function Home() {
             <nav>
               <ul class="flex justify-between text-white">
                 <li>
-                  <a to="/" className="hover:text-gray-300 cursor-pointer">About</a>
+                  <Link href="/" className="hover:text-gray-300 cursor-pointer">About</Link>
                 </li>
                 <li>
-                  <a to="/experience" className="hover:text-gray-300 cursor-pointer">Experience</a>
+                  <Link href='experience' className="hover:text-gray-300 cursor-pointer">Experience</Link>
                 </li>
                 <li>
-                  <a to="/contact" className="hover:text-gray-300 cursor-pointer">Contact</a>
+                  <Link to="contact" className="hover:text-gray-300 cursor-pointer">Contact</Link>
                 </li>
               </ul>
             </nav>

@@ -1,19 +1,21 @@
-import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
-import Routes from './pages/routes/routes'
-
-
+import './App.css'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+//import {Experience} from '../Experience'
+import Home from './pages/Home'
+//import Home from './pages/Home';
+import Experience from './pages/Experience'
 
 
 function App() {
-  return (
-    <>
-      <Router>
-        <Routes/>
-      </Router>
-    </>
-  );
+    return (
+      <>
+        <Home/>
+        <Experience/>
+      </>
+
+    )
 }
 
 export default App;
+
+

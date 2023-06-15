@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+//import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLaptop } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -24,7 +25,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <div className='bg-gradient-animate  flex items-center justify-center h-screen font-mono'>
+    <div className='bg-gradient-animate  flex items-center justify-center h-screen font-mono experience'>
       <div className='bg-opacity-10 bg-white bg-blur-md backdrop-filter backdrop-blur-md p-6 pb-0 rounded-lg shadow-lg  w-72 h-72 flex flex-col' >
         <header className='flex flex-col justify-center items-center'>
           
@@ -44,23 +45,24 @@ export default function Experience() {
                   </div>
                 ))}
             </div>
+            <div className='mt-auto'>
+            <nav>
+              <ul class="flex justify-between text-white">
+                <li>
+                  <a to="/" className="hover:text-gray-300 cursor-pointer">About</a>
+                </li>
+                <li>
+                  <a to="/experience" className="hover:text-gray-300 cursor-pointer">Experience</a>
+                </li>
+                <li>
+                  <a to="/contact" className="hover:text-gray-300 cursor-pointer">Contact</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
           <div>   
         </div>
-        <div className='mt-auto'>
-          <nav>
-                <ul class="flex justify-between text-white">
-                  <li>
-                    <a href="#" class="hover:text-gray-300">About</a>
-                  </li>
-                  <li>
-                    <a href="#" class="hover:text-gray-300">Experience</a>
-                  </li>
-                  <li>
-                    <a href="#" class="hover:text-gray-300">Contact</a>
-                  </li>
-                </ul>
-          </nav>
-        </div>
+        
       </div>
     </div>
   );

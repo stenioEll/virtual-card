@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+//import { Link, NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLaptop } from '@fortawesome/free-solid-svg-icons';
@@ -6,9 +6,9 @@ import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 //import Experience from './pages/Experience';
 import gsap from 'gsap';
-import profilePicture from '../../assets/profile.png';
+import Profile from '../assets/profile.png';
 
-function Home() {
+export default function Home() {
   
   const icons = {
     linkedin: faLinkedin,
@@ -28,11 +28,11 @@ function Home() {
 
   return (
     
-      <div className='bg-gradient-animate  flex items-center justify-center h-screen font-mono'>
+      <div className='bg-gradient-animate  flex items-center justify-center h-screen font-mono home'>
         <div className='bg-opacity-10 bg-white bg-blur-md backdrop-filter backdrop-blur-md p-6 pb-0 rounded-lg shadow-lg  w-72 h-72 flex flex-col' >
           <header className='flex flex-col justify-center items-center'>
             <div className="w-12 h-12 rounded-full overflow-hidden mx-auto">
-              <img className="w-full h-full object-cover" src={profilePicture} alt="Imagem do card" />
+              <img className="w-full h-full object-cover" src={Profile} alt="Imagem do card" />
             </div>
             <h1 className='text-white font-bold'>Frontend Developer</h1>
           </header>
@@ -56,13 +56,13 @@ function Home() {
             <nav>
               <ul class="flex justify-between text-white">
                 <li>
-                  <Link to="/about" className="hover:text-gray-300">About</Link>
+                  <a to="/" className="hover:text-gray-300 cursor-pointer">About</a>
                 </li>
                 <li>
-                  <Link to="/experience" className="hover:text-gray-300">Experience</Link>
+                  <a to="/experience" className="hover:text-gray-300 cursor-pointer">Experience</a>
                 </li>
                 <li>
-                  <Link to="/contact" className="hover:text-gray-300">Contact</Link>
+                  <a to="/contact" className="hover:text-gray-300 cursor-pointer">Contact</a>
                 </li>
               </ul>
             </nav>
@@ -73,4 +73,3 @@ function Home() {
   );
 }
 
-export default Home;

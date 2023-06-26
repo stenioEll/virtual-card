@@ -24,3 +24,8 @@
 .overflow-y-auto::-webkit-scrollbar-track {
   background-color: transparent; /* Fundo transparente da área da barra de rolagem */
 }
+
+.input-transparent {
+  background-color: transparent;
+  outline: none;
+}

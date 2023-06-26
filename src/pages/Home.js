@@ -30,7 +30,7 @@ function Home() {
   return (
     
     <div className='bg-gradient-animate animate-fade-up flex items-center justify-center h-screen font-poppins'>
-        <div className='bg-opacity-10 bg-white bg-blur-md backdrop-filter backdrop-blur-md p-6 pb-0 rounded-lg shadow-lg  w-72 h-80 flex flex-col' >
+        <div className='bg-opacity-10 bg-white bg-blur-md backdrop-filter backdrop-blur-md p-6 pb-0 rounded-lg shadow-lg  w-72 h-96 flex flex-col' >
           <header className='flex flex-col justify-center items-center'>
             <div className="w-12 h-12 rounded-full overflow-hidden mx-auto">
               <img className="animate-fade w-full h-full object-cover" src={Profile} alt="Imagem do card" />
@@ -39,7 +39,7 @@ function Home() {
           </header>
           <div className='mt-2' >
             <h1 className='ml-4 text-[14px] text-white animate-fade-up'>About me</h1>
-            <h1 className='m-4 mt-2 text-white text-justify text-[12px] font-light animate-fade-up' >Hi i am Stênio Ellison student of Computer Engineering at UFPB and Frontend Developer.</h1>
+            <h1 className='m-4 mt-2 text-white text-justify text-[12px] font-light animate-fade-up' >Hello, I am Stênio Ellison, a Computer Engineering student at UFPB, and a frontend developer. My main areas of knowledge are React JS, Next.js, React Native, Django, and Flask.</h1>
           </div>
           <div className=' flex justify-center h-screen mt-2 gap-2'>
               {Object.keys(icons).map((key) => (

@@ -4,7 +4,7 @@ import { faEnvelope, faLaptop } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import gsap from 'gsap';
 
-import { useForm } from 'react-hook-form'
+import { useForm, useFieldArray} from 'react-hook-form'
 import { z } from  'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -17,28 +17,41 @@ const createCardFormSchema = z.object({ // like a structure of date
   portfolio: z.string(),
   email: z.string()
   .nonempty('o e-mail é obrigatório')
-  .email('Formato de e-mail inválido'),
+  .email('Formato de e-mail inválido')
+  .toLowerCase(),
+  techs: z.array(z.object({
+    title: z.string().nonempty('O Título é obrigatório'),
+    knowledge: z.number().min(1).max(100),
+  }))
 })
 
 /**
  * To-do
  *  
- * [] Validação / Tranformação 
+ * [x] Validation / Tranformação 
  * [] Field Arrays
  * [] Uploud de Arquivos 
  * [] Composition Pattern
  */
 
 function Register() {
+
   const [output, setOutput] = useState('');
+
 
   const {
     register,
     handleSubmit,
-    formState : {errors, ...formState}} 
+    formState : {errors, control, ...formState}} 
     = useForm({
     resolver: zodResolver(createCardFormSchema),
   });
+
+  const {fields, append, remove} = useFieldArray({
+    control,
+    name: 'techs',
+
+  })
 
   console.log(formState.errors)
 
@@ -46,6 +59,11 @@ function Register() {
     setOutput(JSON.stringify(data, null, 2));
   }
   
+
+  function addNewTech() {
+    append({ title: '', knowledge: 0})
+  }
+
   
   useEffect(() => {
     const timeline = gsap.timeline({ repeat: -1 });
@@ -55,6 +73,7 @@ function Register() {
       .to('.bg-gradient-animate', { duration: 3, background: 'linear-gradient(to right, #EC4899, #F59E0B)' })
       .to('.bg-gradient-animate', { duration: 3, background: 'linear-gradient(to right, #F59E0B, #34D399)' });
   }, []);
+
 
   return (
     <div className='bg-gradient-animate flex items-center justify-center h-screen font-poppins font-light'>
@@ -67,32 +86,32 @@ function Register() {
             <div className='flex flex-col text-gray-100 gap-4 '>
               <label className='text-left'>Job:</label>
               <input
-                type='job' 
+                type='text' 
                 className='input-transparent shadow rounded w-96 h-10'
                 {...register('job')}
               />
               <label className='text-left'>About You:</label>
               <input
-                type='about' 
+                type='text' 
                 className='input-transparent shadow rounded w-96 h-20'
                 {...register('about')}
               />
               {errors.about && <span>{errors.about.message}</span>}
               <label className='text-left'>Linkedin</label>
               <input
-                type='linkedin' 
+                type='text' 
                 className='input-transparent shadow rounded w-96 h-10'
                 {...register('linkedin')}
               />
               <label className='text-left'>GitHub</label>
               <input
-                type='github' 
+                type='text' 
                 className='input-transparent shadow rounded w-96 h-10'
                 {...register('github')}
               />
               <label className='text-left'>Portfolio</label>
               <input
-                type='portfolio' 
+                type='text' 
                 className='input-transparent shadow rounded w-96 h-10'
                 {...register('portfolio')}
               />
@@ -104,7 +123,39 @@ function Register() {
                 {...register('email')}
               />
               {errors.email && <span className='break-words whitespace-normal '>{errors.email.message}</span>}
+
+
+              <label className='text-left'>
+                Tecnologies
+                <button onClick={addNewTech} className='text-emerald-500 text-sm'>
+                  Add
+                </button>
+              
+              </label>
+
+
+              {fields.map((field, index) => {
+                return (
+                  <div>
+                      <input
+                        key={field.id}
+                        type='text' 
+                        className='input-transparent shadow rounded w-96 h-10'
+                        {...register(`techs.${index}.title`)} 
+                      />
+
+                      
+                      <input
+                        type='number' 
+                        className='input-transparent shadow rounded w-96 h-10'
+                        {...register(`techs.${index}.knowledge`)} 
+                      />
+                  </div>
+                )
+              })}
             </div>
+
+
             <div className='flex justify-center items-center mt-12'>
               <button 
                 type="submit" 

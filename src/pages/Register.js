@@ -11,7 +11,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 const createCardFormSchema = z.object({ // like a structure of date 
   job: z.string(),
   about: z.string()
-    .max(180, 'Please note that the description should not exceed 180 characters'),
+    .max(180, 'Please note that the description should not exceed 180 characters')
+    .min(50, 'At least a 50-character description'),
   linkedin: z.string(),
   github: z.string(),
   portfolio: z.string(),
@@ -42,16 +43,10 @@ function Register() {
   const {
     register,
     handleSubmit,
-    formState : {errors, control, ...formState}} 
+    formState : {errors, ...formState}} 
     = useForm({
     resolver: zodResolver(createCardFormSchema),
   });
-
-  const {fields, append, remove} = useFieldArray({
-    control,
-    name: 'techs',
-
-  })
 
   console.log(formState.errors)
 
@@ -76,8 +71,8 @@ function Register() {
 
 
   return (
-    <div className='bg-gradient-animate flex items-center justify-center h-screen font-poppins font-light'>
-      <div className='bg-opacity-10 bg-white bg-blur-md backdrop-filter backdrop-blur-md p-6 pb-0 rounded-lg shadow-lg  w-1.5/6 h-5/6 flex flex-col'>
+    <div className='bg-gradient-animate flex items-center justify-center h-screen w-full font-poppins font-light'>
+      <div className='bg-opacity-10 bg-white bg-blur-sm backdrop-filter backdrop-blur-sm p-6 pb-0 rounded-lg shadow-lg  w-1.5/6 h-auto sm:w-auto flex flex-col'>
         <header className='flex flex-col justify-center items-center'>
               <h1 className='text-gray-200 font-normal animate-fade-down mb-4'>Register</h1>
         </header>
@@ -91,10 +86,11 @@ function Register() {
                 {...register('job')}
               />
               <label className='text-left'>About You:</label>
-              <input
+              <textarea
                 type='text' 
-                className='input-transparent shadow rounded w-96 h-20'
+                className='input-transparent shadow rounded w-96 h-auto p-2'
                 {...register('about')}
+                
               />
               {errors.about && <span>{errors.about.message}</span>}
               <label className='text-left'>Linkedin</label>
@@ -123,43 +119,12 @@ function Register() {
                 {...register('email')}
               />
               {errors.email && <span className='break-words whitespace-normal '>{errors.email.message}</span>}
-
-
-              <label className='text-left'>
-                Tecnologies
-                <button onClick={addNewTech} className='text-emerald-500 text-sm'>
-                  Add
-                </button>
-              
-              </label>
-
-
-              {fields.map((field, index) => {
-                return (
-                  <div>
-                      <input
-                        key={field.id}
-                        type='text' 
-                        className='input-transparent shadow rounded w-96 h-10'
-                        {...register(`techs.${index}.title`)} 
-                      />
-
-                      
-                      <input
-                        type='number' 
-                        className='input-transparent shadow rounded w-96 h-10'
-                        {...register(`techs.${index}.knowledge`)} 
-                      />
-                  </div>
-                )
-              })}
             </div>
 
-
-            <div className='flex justify-center items-center mt-12'>
+            <div className='flex justify-center items-center mt-8 pb-4'>
               <button 
                 type="submit" 
-                class="bg-opacity-10 bg-white font-normal bg-blur-md backdrop-filter backdrop-blur-md shadow-lg text-white p-2 px-4 w-96 rounded-lg hover:shadow-md transition-all duration-300">
+                class="bg-opacity-10 bg-white font-normal bg-blur-sm backdrop-filter backdrop-blur-sm shadow-lg text-white p-2 px-4 w-96 rounded-lg hover:shadow-sm transition-all duration-300">
                 Register
               </button>
 

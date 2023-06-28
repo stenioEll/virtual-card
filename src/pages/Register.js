@@ -55,10 +55,6 @@ function Register() {
   }
   
 
-  function addNewTech() {
-    append({ title: '', knowledge: 0})
-  }
-
   
   useEffect(() => {
     const timeline = gsap.timeline({ repeat: -1 });

@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLaptop } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
-
+import { faLinkedin, faGithub, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import Tilt from "react-parallax-tilt"
 //import Experience from './pages/Experience';
 import gsap from 'gsap';
 import Profile from '../assets/profile.png';
@@ -11,12 +11,12 @@ import Navbar from '../components/Navbar';
 
 function Home() {
   
-  const icons = {
-    linkedin: faLinkedin,
-    github: faGithub,
-    portfolio: faLaptop,
-    email: faEnvelope
-  };
+  const data = [
+    { icon: faLinkedin, link: 'https://www.linkedin.com/in/st%C3%AAnio-ellison-6b2058212/' },
+    { icon: faGithub, link: 'https://github.com/stenioEll' },
+    { icon:  faWhatsapp , link: 'https://api.whatsapp.com/send?phone=5584999182370&text=Hey%20how%20are%20You.' },
+    { icon: faEnvelope, link: 'mailto:stenio1998@gmail.com' },
+  ];
   
   useEffect(() => {
     const timeline = gsap.timeline({ repeat: -1 });
@@ -30,6 +30,7 @@ function Home() {
   return (
     
     <div className='bg-gradient-animate animate-fade-up flex items-center justify-center h-screen font-poppins'>
+      <Tilt>
         <div className='bg-opacity-10 bg-white bg-blur-md backdrop-filter backdrop-blur-md p-6 pb-0 rounded-lg shadow-lg  w-72 h-96 flex flex-col' >
           <header className='flex flex-col justify-center items-center'>
             <div className="w-12 h-12 rounded-full overflow-hidden mx-auto">
@@ -41,10 +42,13 @@ function Home() {
             <h1 className='ml-4 text-[14px] text-white animate-fade-up'>About me</h1>
             <h1 className='m-4 mt-2 text-white text-justify text-[12px] font-light animate-fade-up' >Hello, I am Stênio Ellison, a Computer Engineering student at UFPB, and a frontend developer. My main areas of knowledge are React JS, Next.js, React Native, Django, and Flask.</h1>
           </div>
-          <div className=' flex justify-center h-screen mt-2 gap-2'>
-              {Object.keys(icons).map((key) => (
-                  
-                  <div key={key}
+          <div className=' flex justify-center mt-4 h-screen gap-2'>
+              {data.map(({ icon, link }) => (  
+                  <a
+                  key={icon}
+                  href={link}
+                  target='_blank'
+                  rel='noopener noreferrer'
                   className={`
                     h-12
                     w-12  
@@ -58,7 +62,6 @@ function Home() {
                     transition 
                     duration-5000 
                     ease-in-out
-                    animate-bounce
                     first:hover:shadow-lg
                   first:hover:bg-blue-400
                   [&:nth-child(2)]:hover:bg-gray-700
@@ -67,22 +70,22 @@ function Home() {
                     [&:nth-child(3)]:hover:shadow-lg
                     last:hover:shadow-lg
                   last:hover:bg-red-400
-                    animate-fade
-                  
-                    `}
-                     
+
+                    `}          
                   >
-                    <FontAwesomeIcon icon={icons[key]} color='white' style={{ opacity: 0.9 }} />
-                  </div>
+                    <FontAwesomeIcon icon={icon} color='white' style={{ opacity: 0.9 }} />
+                  </a>
                 ))}
-            </div>
-            <div>   
+            </div>  
+            <div>
+              
           </div>
           <div className='animate-fade'>
             <Navbar/>
           </div>
           
         </div>
+        </Tilt>
       </div>
     
   );

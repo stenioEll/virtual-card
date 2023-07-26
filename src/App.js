@@ -11,6 +11,7 @@ import Register from './pages/Register';
 
 
 
+
 function App() {
     const [isOpen, setIsOpen] = useState(false);
 

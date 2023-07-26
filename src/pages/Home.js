@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLaptop } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLaptop, faPause, faPauseCircle, faPlayCircle} from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faGithub, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Tilt from "react-parallax-tilt"
 //import Experience from './pages/Experience';
@@ -10,7 +9,11 @@ import Profile from '../assets/profile.png';
 import Navbar from '../components/Navbar';
 
 function Home() {
-  
+
+  const [isPaused, setIsPaused] = useState(false);
+  const timelineRef = useRef(null);
+  const gradientRef = useRef(null);
+
   const data = [
     { icon: faLinkedin, link: 'https://www.linkedin.com/in/st%C3%AAnio-ellison-6b2058212/' },
     { icon: faGithub, link: 'https://github.com/stenioEll' },
@@ -19,17 +22,43 @@ function Home() {
   ];
   
   useEffect(() => {
-    const timeline = gsap.timeline({ repeat: -1 });
-    timeline
-      .to('.bg-gradient-animate', { duration: 3, background: 'linear-gradient(to right, #34D399, #3B82F6)' })
-      .to('.bg-gradient-animate', { duration: 3, background: 'linear-gradient(to right, #3B82F6, #EC4899)' })
-      .to('.bg-gradient-animate', { duration: 3, background: 'linear-gradient(to right, #EC4899, #F59E0B)' })
-      .to('.bg-gradient-animate', { duration: 3, background: 'linear-gradient(to right, #F59E0B, #34D399)' });
-  }, []);
+    timelineRef.current = gsap.timeline({ repeat: -1 });
+    timelineRef.current
+      .to(gradientRef.current, { duration: 3, background: 'linear-gradient(to right, #34D399, #3B82F6)' })
+      .to(gradientRef.current, { duration: 3, background: 'linear-gradient(to right, #3B82F6, #EC4899)' })
+      .to(gradientRef.current, { duration: 3, background: 'linear-gradient(to right, #EC4899, #F59E0B)' })
+      .to(gradientRef.current, { duration: 3, background: 'linear-gradient(to right, #F59E0B, #34D399)' });
+
+    if (isPaused) {
+      timelineRef.current.pause();
+    }
+
+    return () => {
+      timelineRef.current.kill();
+    };
+  }, [isPaused]);
+
+  const toggleAnimation = () => {
+    setIsPaused((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    if (timelineRef.current) {
+      if (isPaused) {
+        timelineRef.current.pause();
+      } else {
+        timelineRef.current.play();
+      }
+    }
+  }, [isPaused]);
+
 
   return (
     
-    <div className='bg-gradient-animate animate-fade-up flex items-center justify-center h-screen font-poppins'>
+    <div ref={gradientRef} className='bg-gradient-animate animate-fade-up flex items-center justify-center h-screen font-poppins'>
+      <button onClick={toggleAnimation} className='absolute top-5 right-5 text-white'>
+        {isPaused ? <FontAwesomeIcon icon={faPlayCircle} /> : <FontAwesomeIcon icon={faPauseCircle} />}
+      </button>
       <Tilt>
         <div className='bg-opacity-10 bg-white bg-blur-md backdrop-filter backdrop-blur-md p-6 pb-0 rounded-lg shadow-lg  w-72 h-96 flex flex-col' >
           <header className='flex flex-col justify-center items-center'>
